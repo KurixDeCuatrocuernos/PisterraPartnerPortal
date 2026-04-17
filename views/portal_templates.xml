@@ -1,4 +1,4 @@
-<!-- Aquí va la parte visual del proyecto -->
+<!-- Aquí va la parte visual del módulo -->
 <odoo>
     <template id="portal_bookings_template">
         <t t-call="website.layout">

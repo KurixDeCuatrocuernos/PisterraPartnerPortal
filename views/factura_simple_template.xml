@@ -1,0 +1,42 @@
+<!-- Esta es la vista de Mis Facturas -->
+<odoo>
+    <template id="factura_simple_template">
+        <t t-call="website.layout">
+            <div class="container">
+                <p>Total facturas: <t t-esc="debug_count"/></p>
+                <t t-foreach="facturas" t-as="f">
+                    <div class="card p-3 mb-3">
+                    <!-- Campos que se muestran -->
+                        <h4><t t-esc="f.name"/></h4> <!-- Nombre de la factura -->
+
+                        <p><strong>Estado de pago: </strong>
+                            <t t-if="f.payment_state == 'paid'">Pagada</t> 
+                            <t t-if="f.payment_state == 'not_paid'">Pendiente de pago</t>
+                            <t t-if="f.payment_state == 'partial'">Parcial</t>
+                            <t t-else="">Otro</t>
+                        </p>
+
+                        <p><strong>Fecha de emisión: </strong><t t-esc="f.invoice_date"/></p>
+
+                        <p><strong>Total: </strong><t t-esc="f.currency_id.symbol"/> <t t-esc="f.amount_total"/> </p>
+
+                        <p><strong>Vencimiento: </strong><t t-esc="f.invoice_date_due"/></p>
+                        
+                        <!-- Botón para ver la factura en detalle -->
+                        <a t-att-href="'/pisterra/invoices/%s' % f.id"
+                            class="btn btn-secondary">
+                            Ver detalles
+                        </a>
+
+                        <!-- Botón de descarga del PDF -->
+                        <a t-att-href="'/report/pdf/account.report_invoice/%s' % f.id"
+                            class="btn btn-primary"
+                            target="_blank">
+                            Descargar PDF
+                        </a>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

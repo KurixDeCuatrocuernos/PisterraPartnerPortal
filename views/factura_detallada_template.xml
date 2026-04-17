@@ -1,0 +1,33 @@
+<!-- Esta es la vista de Mis Facturas -->
+<odoo>
+    <template id="factura_detallada_template">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="card p-3 my-3">
+                <!-- Campos que se muestran -->
+                    <h2><t t-esc="f.name"/></h2>
+
+                    <p><strong>Total: </strong><t t-esc="f.currency_id.symbol"/> <t t-esc="f.amount_total"/> </p>
+                    <p><strong>Estado: </strong><t t-esc="f.payment_state"/></p>
+                    <p><strong>Fecha: </strong><t t-esc="f.invoice_date"/></p>
+
+                    <h4>Líneas</h4>
+
+                    <t t-foreach="f.invoice_line_ids" t-as="l">
+                        <p>
+                            <t t-esc="l.name"/> -
+                            <t t-esc="l.quantity"/> x
+                            <t t-esc="l.price_unit"/>
+                        </p>
+                    </t>
+
+                    <a t-att-href="'/report/pdf/account.report_invoice/%s' % f.id"
+                    class="btn btn-primary"
+                    target="_blank">
+                        Descargar PDF
+                    </a>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

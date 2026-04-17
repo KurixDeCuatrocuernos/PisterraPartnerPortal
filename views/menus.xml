@@ -9,10 +9,16 @@
             <field name="view_mode">list,form</field>
         </record>
 
+         <!-- MENÚ RAÍZ -->
+        <menuitem id="menu_pisterra_root"
+                  name="Pisterra"
+                  action="action_my_bookings"
+                  sequence="10"/>
+
         <!-- MENU DENTRO DE CRM (CRM -> My Bookings) -->
         <menuitem id="menu_my_bookings"
                   name="My Bookings"
-                  parent="crm.crm_menu_root"
+                  parent="menu_pisterra_root"
                   action="action_my_bookings"
                   sequence="10"/>
 

@@ -1,0 +1,28 @@
+<!-- Aquí va la parte visual del módulo -->
+<odoo>
+    <template id="booking_template">
+        <t t-call="portal.portal_layout">
+            <t t-set="page_name" t-value="'bookings'"/>
+
+            <t t-call="pisterra_partner_portal.pisterra_portal_navbar"/>
+            
+            <div class="container">
+                <div class="alert alert-info">
+                    <h4>Mis Envíos</h4>
+                    <p>Aquí aparecerán tus envíos</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <t t-foreach="bookings" t-as="b">
+                    <div class="card">
+                        <p>Date: <t t-esc="b.date"/></p>
+                        <p>Slot: <t t-esc="b.slot"/></p>
+                        <p>KG: <t t-esc="b.estimated_kg"/></p>
+                        <p>Status: <t t-esc="b.status"/></p>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

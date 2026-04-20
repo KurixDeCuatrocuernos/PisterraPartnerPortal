@@ -1,0 +1,28 @@
+<!-- Este es el Navbar de nuestro módulo -->
+<odoo>
+    <template id="pisterra_portal_navbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-4">
+            <div class="container">
+                <a class="navbar-brand" href="/pisterra/dashboard">
+                    <strong>Pisterra</strong>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pisterraNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="pisterraNavbar">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pisterra/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pisterra/bookings">Mis Envíos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pisterra/invoices">Mis Facturas</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </template>
+</odoo>

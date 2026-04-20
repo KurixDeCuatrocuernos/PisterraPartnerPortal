@@ -1,7 +1,8 @@
 <!-- Esta es la vista de Mis Facturas -->
 <odoo>
-    <template id="factura_detallada_template">
-        <t t-call="website.layout">
+    <template id="factura_detallada_template"> <!-- Este id es al que llamamos en controllers/portal.py -->
+        <t t-call="portal.portal_layout">
+            <t t-call="pisterra_partner_portal.pisterra_portal_navbar"/>
             <div class="container">
                 <div class="card p-3 my-3">
                 <!-- Campos que se muestran -->

@@ -1,28 +1,113 @@
-<!-- Este es el Navbar de nuestro módulo -->
+<!-- Este es el Navbar de nuestro módulo (modifica portal.frontend_layout de Odoo > QWeb) -->
 <odoo>
-    <template id="pisterra_portal_navbar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-4">
-            <div class="container">
-                <a class="navbar-brand" href="/pisterra/dashboard">
-                    <strong>Pisterra</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pisterraNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="pisterraNavbar">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/pisterra/dashboard">Dashboard</a>
+    
+    <!-- Este es el navbar de nuestro módulo -->
+    <template id="pisterra_portal_navbar" inherit_id="portal.frontend_layout" name="Extend Portal Navbar">
+        <xpath expr="//div[@id='wrapwrap']/header" position="replace"> <!-- Sustituimos el navbar de Odoo por el nuestro -->
+
+            <header>
+                <!-- Si el usuario ha iniciado sesión -->
+                <t t-if="not request.env.user._is_public()">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                        <div class="container">
+                            <a class="navbar-brand" href="/pisterra/dashboard">
+                                <strong>Pisterra</strong>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pisterraNavbar">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="pisterraNavbar">
+                                <ul class="navbar-nav me-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/pisterra/dashboard">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/pisterra/invoices">Mis Facturas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/pisterra/bookings">Mis Envíos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Mis Reservas y Entregas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Mis Documentos Oficiales</a>
+                                    </li>
+                                </ul>
+                                
+                                <!-- Menú de usuario (logueado) -->
+                                <ul class="navbar-nav">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                            <span t-esc="request.env.user.name"/>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="/web/logout">Cerrar Sesión</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </t>
+                <!-- Si el usuario no ha iniciado sesión -->
+                <t t-else="">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                        <div class="container">
+                            <a class="navbar-brand" href="/pisterra/dashboard">
+                                <strong>Pisterra</strong>
+                            </a>
+                            <div class="collapse navbar-collapse">
+                                <ul class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/web/login">Iniciar Sesión</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </t>
+
+
+            </header>
+
+        </xpath>
+    </template>
+
+    <!-- Este es el Breadcrumb de nuestro módulo -->
+    <template id="pisterra_dynamic_breadcrumbs" inherit_id="portal.portal_layout" name="Dynamic Portal Breadcrumbs">
+        <xpath expr="//div[hasclass('o_portal')]" position="replace">
+        
+            <div class="o_portal container mt-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    
+                    <!-- Nuestro breadcrumb -->
+                    <ol class="breadcrumb" style="display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0;">
+                        <li class="breadcrumb-item" style="display: flex; align-items: center;">
+                            <a href="/pisterra/dashboard">
+                                <i class="fa fa-home"></i> Inicio
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/pisterra/bookings">Mis Envíos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/pisterra/invoices">Mis Facturas</a>
-                        </li>
-                    </ul>
+                        <t t-foreach="breadcrumb_pages" t-as="page">
+                            <li class="breadcrumb-item" t-att-class="{'active': page_active == page['name']}" style="display: flex; align-items: center;">
+                                <span style="margin: 0 8px;">/</span>
+                                <a t-attf-href="#{page['url']}" t-if="page_active != page['name']">
+                                    <t t-esc="page['name']"/>
+                                </a>
+                                <span t-else="">
+                                    <t t-esc="page['name']"/>
+                                </span>
+                            </li>
+                        </t>
+                    </ol>
+                    
+                    <!-- Paginador -->
+                    <t t-if="prev_record or next_record" t-call="portal.record_pager"/>
+                    
                 </div>
             </div>
-        </nav>
+            
+        </xpath>
     </template>
+
 </odoo>

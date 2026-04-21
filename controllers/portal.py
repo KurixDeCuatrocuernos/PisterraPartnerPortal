@@ -21,10 +21,12 @@ from odoo.http import request
 class Portal(http.Controller):
     
 # Ruta para ir a la página de inicio
-    @http.route(['/pisterra/dashboard', '/pisterra/dashboard/'], type="http", auth='public', website=True)
+    @http.route(['/', '/pisterra/dashboard', '/pisterra/dashboard/'], type="http", auth='user', website=True)
     def dashboard(self):
         dashboard = request.env['pisterra.dash.model'].search([]) # Recogemos los datos del modelo
         return request.render('pisterra_partner_portal.dash_main_template', {
+            'breadcrumb_pages': [], 
+            'page_active': 'Inicio', # Añadimos la referencia para el breadcrumb
             'dash': dashboard
         }) # Devolvemos el modelo a dash_template.xml
     
@@ -33,6 +35,10 @@ class Portal(http.Controller):
     def my_bookings(self):
         bookings = request.env['pisterra.unload.booking'].search([])
         return request.render('pisterra_partner_portal.booking_template', {
+            'breadcrumb_pages': [
+                {'name': 'Mis Envíos', 'url': '/pisterra/bookings'}
+            ],
+            'page_active': 'Mis Envíos', # Añadimos la referencia para el breadcrumb
             'bookings': bookings,
         })
     
@@ -46,6 +52,10 @@ class Portal(http.Controller):
             ('state', '=', 'posted')
         ])
         return request.render('pisterra_partner_portal.factura_simple_template', {
+            'breadcrumb_pages': [
+                {'name': 'Mis Facturas', 'url': '/pisterra/invoices'}
+            ],
+            'page_active': 'Mis Facturas', # Añadimos la referencia para el breadcrumb
             'facturas': facturas,
         }) # Devolvemos las facturas a facturas_template.xml
    
@@ -54,5 +64,10 @@ class Portal(http.Controller):
     def factura_en_detalle(self, invoice_id):
         factura = request.env['account.move'].sudo().browse(invoice_id) # Recogemos la factura por su id
         return request.render('pisterra_partner_portal.factura_detallada_template', {
+            'breadcrumb_pages': [
+                {'name': 'Mis Facturas', 'url': '/pisterra/invoices'},
+                {'name': factura.name, 'url': f'/pisterra/invoices/{invoice_id}'}
+            ],
+            'page_active': factura.name, # Añadimos la referencia para el breadcrumb
             'f': factura
         }) # Devolvemos la factura a factura_detallada_template.xml

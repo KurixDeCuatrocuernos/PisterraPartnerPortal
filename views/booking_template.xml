@@ -1,11 +1,9 @@
 <!-- Aquí va la parte visual del módulo -->
 <odoo>
-    <template id="booking_template">
-        <t t-call="portal.portal_layout">
+    <template id="booking_template"> 
+        <t t-call="portal.portal_layout"> <!-- Importamos el Navbar -->
             <t t-set="page_name" t-value="'bookings'"/>
-
-            <t t-call="pisterra_partner_portal.pisterra_portal_navbar"/>
-            
+                        
             <div class="container">
                 <div class="alert alert-info">
                     <h4>Mis Envíos</h4>
@@ -23,6 +21,7 @@
                     </div>
                 </t>
             </div>
+            
         </t>
     </template>
 </odoo>

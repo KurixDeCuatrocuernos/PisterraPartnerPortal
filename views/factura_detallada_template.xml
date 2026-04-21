@@ -1,15 +1,21 @@
 <!-- Esta es la vista de Mis Facturas -->
 <odoo>
     <template id="factura_detallada_template"> <!-- Este id es al que llamamos en controllers/portal.py -->
-        <t t-call="portal.portal_layout">
-            <t t-call="pisterra_partner_portal.pisterra_portal_navbar"/>
+        <t t-call="portal.portal_layout"> <!-- Importamos el navbar -->
+
             <div class="container">
                 <div class="card p-3 my-3">
                 <!-- Campos que se muestran -->
                     <h2><t t-esc="f.name"/></h2>
 
                     <p><strong>Total: </strong><t t-esc="f.currency_id.symbol"/> <t t-esc="f.amount_total"/> </p>
-                    <p><strong>Estado: </strong><t t-esc="f.payment_state"/></p>
+                    <p>
+                        <strong>Estado: </strong>
+                        <t t-if="f.payment_state == 'paid'"><span  class="text-success">Pagada</span></t> 
+                        <t t-elif="f.payment_state == 'not_paid'"><span  class="text-danger">Pendiente de pago</span></t>
+                        <t t-elif="f.payment_state == 'partial'"><span  class="text-warning">Parcial</span></t>
+                        <t t-else="f.payment_state"><span class="">Otro</span></t>
+                    </p>
                     <p><strong>Fecha: </strong><t t-esc="f.invoice_date"/></p>
 
                     <h4>Líneas</h4>
@@ -29,6 +35,7 @@
                     </a>
                 </div>
             </div>
+            
         </t>
     </template>
 </odoo>

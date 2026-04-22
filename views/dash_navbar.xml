@@ -2,21 +2,22 @@
 <odoo>
     
     <!-- Este es el navbar de nuestro módulo -->
-    <template id="pisterra_portal_navbar" inherit_id="portal.frontend_layout" name="Extend Portal Navbar">
-        <xpath expr="//div[@id='wrapwrap']/header" position="replace"> <!-- Sustituimos el navbar de Odoo por el nuestro -->
+     <template id="pisterra_portal_navbar" inherit_id="portal.frontend_layout" name="Extend Portal Navbar">
+        <xpath expr="//div[@id='wrapwrap']/header" position="replace">
 
             <header>
-                <!-- Si el usuario ha iniciado sesión -->
-                <t t-if="not request.env.user._is_public()">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                        <div class="container">
-                            <a class="navbar-brand" href="/pisterra/dashboard">
-                                <strong>Pisterra</strong>
-                            </a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pisterraNavbar">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="pisterraNavbar">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container">
+                        <a class="navbar-brand" href="/pisterra/dashboard">
+                            <strong>Pisterra</strong>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pisterraNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="pisterraNavbar">
+                            <!-- Usuario logueado -->
+                            <t t-if="not request.env.user._is_public()">
                                 <ul class="navbar-nav me-auto">
                                     <li class="nav-item">
                                         <a class="nav-link" href="/pisterra/dashboard">Dashboard</a>
@@ -34,54 +35,43 @@
                                         <a class="nav-link" href="#">Mis Documentos Oficiales</a>
                                     </li>
                                 </ul>
-                                
-                                <!-- Menú de usuario (logueado) -->
                                 <ul class="navbar-nav">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                             <span t-esc="request.env.user.name"/>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="/web/logout">Cerrar Sesión</a></li>
+                                            <li><a class="dropdown-item" href="/web/session/logout">Cerrar Sesión</a></li>
                                         </ul>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
-                    </nav>
-                </t>
-                <!-- Si el usuario no ha iniciado sesión -->
-                <t t-else="">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                        <div class="container">
-                            <a class="navbar-brand" href="/pisterra/dashboard">
-                                <strong>Pisterra</strong>
-                            </a>
-                            <div class="collapse navbar-collapse">
+                            </t>
+                            
+                            <!-- Usuario NO logueado (público) -->
+                            <t t-else="">
                                 <ul class="navbar-nav ms-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/web/login">Iniciar Sesión</a>
+                                        <a class="nav-link" href="/web/login?redirect=/pisterra/dashboard">Iniciar Sesión</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </t>
                         </div>
-                    </nav>
-                </t>
-
+                    </div>
+                </nav>
 
             </header>
 
         </xpath>
     </template>
 
-    <!-- Este es el Breadcrumb de nuestro módulo -->
+    <!-- Breadcrumb -->
     <template id="pisterra_dynamic_breadcrumbs" inherit_id="portal.portal_layout" name="Dynamic Portal Breadcrumbs">
         <xpath expr="//div[hasclass('o_portal')]" position="replace">
         
             <div class="o_portal container mt-3">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     
-                    <!-- Nuestro breadcrumb -->
+                    <!-- Breadcrumb -->
                     <ol class="breadcrumb" style="display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0;">
                         <li class="breadcrumb-item" style="display: flex; align-items: center;">
                             <a href="/pisterra/dashboard">
@@ -106,7 +96,7 @@
                     
                 </div>
             </div>
-            
+
         </xpath>
     </template>
 

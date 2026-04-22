@@ -1,15 +1,98 @@
 <!-- Esta es la página de inicio -->
 <odoo>
-    <template id="dash_main_template"> <!-- Este id es al que llamamos en controllers/portal.py -->
-        <t t-call="portal.portal_layout"> <!-- Importamos el navbar -->    
+    <template id="dash_main_template">
+        <t t-call="portal.portal_layout">
+            
+            <div class="container mt-3">
+                <!-- Título -->
+                <h1 class="text-center text-success">Menú Principal</h1>
 
-            <!-- Contenido Principal -->
-            <div class="container">
-                <p>Este es el menu inicial</p>
-                        
+                <!-- Carrusel -->
+                <section class="mt-3">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/web/static/img/logo.png" class="d-block w-100" alt="Imagen 1"/>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/web/static/img/logo.png" class="d-block w-100" alt="Imagen 2"/>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/web/static/img/logo.png" class="d-block w-100" alt="Imagen 3"/>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Sección de texto -->
+                <section class="mt-5">
+                    <h4 class='text-center'>Procesamos pistachos locales con el máximo cuidado, garantizando calidad y seguridad alimentaria. Apostamos por la sostenibilidad, la proximidad y el compromiso con los productores.</h4>
+                </section>
+
             </div>
+
+            <!-- Sección de tarjetas -->
+            <section class="mt-5">
+                <div class="row justify-content-center">
+                    
+                    <!-- Tarjeta de Facturas -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                            <img src="/web/static/img/logo.png" class="card-img-top p-3" alt="Facturas" style="height: 120px; object-fit: contain;"/>
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Ver y descargar las facturas</h5>
+                                <p class="card-text">En nuestra página podrás ver las facturas que se han generado, podrás ver su estado y podrás descargarlas fácilmente si las necesitas.</p>
+                                <div class="text-center">
+                                    <a href="/pisterra/invoices" class="btn btn-success text-light">Ir a Facturas</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tarjeta de Pedidos -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                            <img src="/web/static/img/logo.png" class="card-img-top p-3" alt="Pedidos" style="height: 120px; object-fit: contain;"/>
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Realizar pedidos</h5>
+                                <p class="card-text">En nuestra página podrás realizar pedidos a nuestra empresa y mantener un seguimiento constante de tus pedidos.</p>
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-success text-light">Ir a Pedidos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tarjeta de Producción -->
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="card h-100">
+                            <img src="/web/static/img/logo.png" class="card-img-top p-3" alt="Producción" style="height: 120px; object-fit: contain;"/>
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Producción e Inventario</h5>
+                                <p class="card-text">Nuestros productores podrán mantenerse informados de cuánto pueden producir y si se ha generado una solicitud de producción de forma que puedan usar los recursos de una forma sostenible.</p>
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-success text-light">Ir a Producción</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
 
         </t>
     </template>
-
 </odoo>

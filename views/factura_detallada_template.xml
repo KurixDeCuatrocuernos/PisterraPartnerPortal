@@ -28,7 +28,7 @@
                         </p>
                     </t>
 
-                    <a t-att-href="'/report/pdf/account.report_invoice/%s' % f.id"
+                    <a t-att-href="'/pisterra/invoices/download/%s' % f.id"
                     class="btn btn-primary"
                     target="_blank">
                         Descargar PDF

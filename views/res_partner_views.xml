@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="registro_view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.registro.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="registro_estado" string="Estado de Registro"/>
+                        
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="registro_action_agricultores_pendientes" model="ir.actions.act_window">
+            <field name="name">Validar Agricultores</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('registro_estado', '=', 'pendiente')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay agricultores pendientes de validación.
+                </p>
+            </field>
+
+        </record>
+
+        <menuitem id="registro_menu_root" 
+                  name="Pisterra Portal" 
+                  sequence="10"/>
+
+        <menuitem id="registro_menu_validaciones" 
+                  name="Validaciones" 
+                  parent="registro_menu_root" 
+                  sequence="1"/>
+
+        <menuitem id="registro_menu_pendientes" 
+                  name="Agricultores Pendientes" 
+                  parent="registro_menu_validaciones" 
+                  action="registro_action_agricultores_pendientes" 
+                  sequence="1"/>
+
+    </data>
+</odoo>

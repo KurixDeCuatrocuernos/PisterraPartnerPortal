@@ -15,15 +15,27 @@
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
-                        <div class="carousel-inner">
+                        <div class="carousel-inner bg-dark bg-opacity-50">
                             <div class="carousel-item active">
-                                <img src="/web/static/img/logo.png" class="d-block w-100" alt="Imagen 1"/>
+                                <img src="/pisterra_partner_portal\static\src\img\factura_simple_page.jpg" class="d-block w-100 h-100" alt="Imagen de la página de facturas" style="filter: brightness(0.6); object-fit: contain;"/>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h2 class="text-white text-bold fw-bold">Facturas</h2>
+                                    <p class="text-white text-bold lead">Aquí puedes ver y descargar tus facturas</p>
+                                </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="/web/static/img/logo.png" class="d-block w-100" alt="Imagen 2"/>
+                                <img src="/pisterra_partner_portal\static\src\img\factura_simple_page.jpg" class="d-block w-100 h-100" alt="Imagen de la página de facturas" style="filter: brightness(0.6); object-fit: contain;"/>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h2 class="text-white text-bold fw-bold">Pedidos</h2>
+                                    <p class="text-white text-bold lead">Aquí puedes realizar el seguimiento de tus pedidos</p>
+                                </div>
                             </div>
-                            <div class="carousel-item">
-                                <img src="/web/static/img/logo.png" class="d-block w-100" alt="Imagen 3"/>
+                            <div class="carousel-item active">
+                                <img src="/pisterra_partner_portal\static\src\img\factura_simple_page.jpg" class="d-block w-100 h100" alt="Imagen de la página de facturas" style="filter: brightness(0.6); object-fit: contain;"/>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h2 class="text-white text-bold fw-bold">Producción e Inventario</h2>
+                                    <p class="text-white text-bold lead">Aquí puedes consultar las solicitudes de producción</p>
+                                </div>
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

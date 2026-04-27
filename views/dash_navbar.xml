@@ -3,7 +3,7 @@
     
     <!-- Este es el navbar de nuestro módulo -->
      <template id="pisterra_portal_navbar" inherit_id="portal.frontend_layout" name="Extend Portal Navbar">
-        <xpath expr="//div[@id='wrapwrap']/header" position="replace">
+        <xpath expr="//div[@id='wrapwrap']/header" position="before">
 
             <header>
 
@@ -16,33 +16,24 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="pisterraNavbar">
+                            
                             <!-- Usuario logueado -->
                             <t t-if="not request.env.user._is_public()">
                                 <ul class="navbar-nav me-auto">
                                     <li class="nav-item">
                                         <a class="nav-link" href="/pisterra/dashboard">Dashboard</a>
-                                    </li>
+                                    </li>                                    
                                     <li class="nav-item">
                                         <a class="nav-link" href="/pisterra/invoices">Mis Facturas</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="/pisterra/bookings">Mis Envíos</a>
+                                        <a class="nav-link" href="#">Mis Documentos Oficiales</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Mis Reservas y Entregas</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Mis Documentos Oficiales</a>
-                                    </li>
-                                </ul>
-                                <ul class="navbar-nav">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                            <span t-esc="request.env.user.name"/>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="/web/session/logout">Cerrar Sesión</a></li>
-                                        </ul>
                                     </li>
                                 </ul>
                             </t>

@@ -1,3 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_pisterra_dash_model_user,pisterra.dash.model.user,model_pisterra_dash_model,base.group_user,1,1,1,1
-access_unload_booking_user,unload.booking.user,model_pisterra_unload_booking,base.group_user,1,1,1,1

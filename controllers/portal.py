@@ -30,18 +30,6 @@ class Portal(http.Controller):
             'dash': dashboard
         }) # Devolvemos el modelo a dash_template.xml
     
-# Ruta para ir a la página para ver los envíos
-    @http.route(['/pisterra/bookings', '/pisterra/bookings/'], auth='user', website=True)
-    def my_bookings(self):
-        bookings = request.env['pisterra.unload.booking'].search([])
-        return request.render('pisterra_partner_portal.booking_template', {
-            'breadcrumb_pages': [
-                {'name': 'Mis Envíos', 'url': '/pisterra/bookings'}
-            ],
-            'page_active': 'Mis Envíos', # Añadimos la referencia para el breadcrumb
-            'bookings': bookings,
-        })
-    
 # Ruta para ir a la página que muestra las facturas
     @http.route(['/pisterra/invoices', '/pisterra/invoices/'], auth='user', website=True)
     def mis_facturas(self):

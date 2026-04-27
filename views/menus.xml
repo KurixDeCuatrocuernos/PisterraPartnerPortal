@@ -18,13 +18,6 @@
             <field name="target">self</field>
         </record>
 
-        <!-- Redirección a Mis Envíos -->
-        <record id="action_my_bookings_url" model="ir.actions.act_url">
-            <field name="name">Mis Envíos</field>
-            <field name="url">/pisterra/bookings</field>
-            <field name="target">self</field>
-        </record>
-
         <!-- Redirección a Mi Inventario -->    
         <record id="action_my_inventory" model="ir.actions.act_window">
             <field name="name">Mi Inventario</field>
@@ -45,13 +38,6 @@
             parent="menu_pisterra_root"
             action="action_dash_main"
             sequence="10"/>
-
-        <!-- MENÚ Mis Envíos -->
-        <menuitem id="menu_my_bookings"
-            name="Mis Envíos"
-            parent="menu_pisterra_root"
-            action="action_my_bookings_url" 
-            sequence="20"/>
         
         <!-- MENÚ Mis Facturas -->
         <menuitem id="menu_my_invoices"

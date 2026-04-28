@@ -5,7 +5,7 @@
 ## *controllers/portal.py*
 
 ### `🏷️ class` Portal():
-La clase que contiene las redirecciones del módulo 
+La clase orquestadora que contiene las redirecciones del módulo 
 
 #### `🔧 def` dashboard(): 
 Función que establece la ruta para ir a la página dashboard.

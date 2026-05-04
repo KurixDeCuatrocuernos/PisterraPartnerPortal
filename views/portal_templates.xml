@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="doc_portal_list_template" name="Mis Documentos">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-4 mb-5">
+                    <h3>Mis Documentos Obligatorios</h3>
+                    <p>Para poder realizar reservas, debes completar la siguiente documentación:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Documento</th>
+                                    <th>Tipo de Acción</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="documentos" t-as="doc">
+                                    <tr>
+                                        <td class="align-middle"><t t-esc="doc.name"/></td>
+                                        <td class="align-middle">
+                                            <span t-if="doc.doc_type == 'upload'">Subir archivo</span>
+                                            <span t-if="doc.doc_type == 'accept'">Aceptar términos</span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <span t-if="doc.state == 'pending'" class="badge bg-warning text-dark">Pendiente</span>
+                                            <span t-if="doc.state == 'submitted'" class="badge bg-info text-dark">En revisión</span>
+                                            <span t-if="doc.state == 'approved'" class="badge bg-success">Aprobado</span>
+                                            <span t-if="doc.state == 'rejected'" class="badge bg-danger">Rechazado</span>
+                                        </td>
+                                        <td class="align-middle">
+                                           <a t-if="doc.state in ['pending', 'rejected']" t-attf-href="/mis-documentos/{{ doc.id }}" class="btn btn-primary btn-sm">Gestionar</a>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </template>
+        <template id="doc_portal_detail_template" name="Gestionar Documento">
+            <t t-call="portal.portal_layout">
+                <div class="container mt-4 mb-5">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">Gestionar Documento: <t t-esc="documento.name"/></h4>
+                        </div>
+                        <div class="card-body">
+                            <div t-if="documento.state == 'rejected'" class="alert alert-danger">
+                                <strong>Documento Rechazado:</strong> <t t-esc="documento.admin_notes"/>
+                            </div>
+
+                            <form action="/mis-documentos/procesar" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <input type="hidden" name="doc_id" t-att-value="documento.id"/>
+
+                                <div t-if="documento.doc_type == 'upload'" class="mb-3">
+                                    <label for="upload_file" class="form-label">Selecciona el archivo PDF o Imagen</label>
+                                    <input type="file" class="form-control" id="upload_file" name="upload_file" required="1"/>
+                                </div>
+
+                                <div t-if="documento.doc_type == 'accept'" class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="accept_terms" name="accept_terms" required="1"/>
+                                    <label class="form-check-label" for="accept_terms">
+                                        He leído y acepto las condiciones de este documento.
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-success mt-3">Enviar Documento</button>
+                                <a href="/mis-documentos" class="btn btn-secondary mt-3 ms-2">Volver</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

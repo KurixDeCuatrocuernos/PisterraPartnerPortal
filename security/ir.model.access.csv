@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pisterra_doc_obligatorio_user,pisterra.doc.obligatorio.user,model_pisterra_doc_obligatorio,base.group_user,1,1,1,1
+access_pisterra_doc_obligatorio_portal,pisterra.doc.obligatorio.portal,model_pisterra_doc_obligatorio,base.group_portal,1,1,1,0

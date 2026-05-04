@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        1. Vista de Lista (Lo que ve el admin al entrar al menú) 
+        <record id="doc_view_tree" model="ir.ui.view">
+            <field name="name">pisterra.doc.obligatorio.tree</field>
+            <field name="model">pisterra.doc.obligatorio</field>
+            <field name="arch" type="xml">
+                <tree string="Documentos Obligatorios">
+                    <field name="partner_id"/>
+                    <field name="name"/>
+                    <field name="doc_type"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        2. Vista de Formulario (Lo que ve el admin al hacer clic en un documento)
+        <record id="doc_view_form" model="ir.ui.view">
+            <field name="name">pisterra.doc.obligatorio.form</field>
+            <field name="model">pisterra.doc.obligatorio</field>
+            <field name="arch" type="xml">
+                <form string="Documento Obligatorio">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="name"/>
+                                <field name="doc_type"/>
+                            </group>
+                            <group>
+                                <field name="doc_filename" invisible="1"/>
+                                <field name="doc_file" filename="doc_filename"/>
+                                <field name="is_accepted"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="admin_notes"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        3. La Acción (El motor que abre estas vistas)
+        <record id="doc_action" model="ir.actions.act_window">
+            <field name="name">Revisión de Documentos</field>
+            <field name="res_model">pisterra.doc.obligatorio</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- 4. El Menú (El botón en la barra superior de Odoo) -->
+        <menuitem id="doc_menu_root" name="Documentos Productores" action="doc_action" sequence="10"/>
+    </data>
+</odoo>

@@ -4,22 +4,11 @@ from odoo.addons.portal.controllers.portal import CustomerPortal
 
 class PisterraPortal(CustomerPortal):
 
-    def _prepare_home_portal_values(self, counters):
-        values = super()._prepare_home_portal_values(counters)
-        if 'delivery_count' in counters:
-            partner = request.env.user.partner_id
-            delivery_count = request.env['stock.picking'].sudo().search_count([
-                ('partner_id', '=', partner.id),
-                ('picking_type_id.code', '=', 'incoming')
-            ])
-            values['delivery_count'] = delivery_count
-        return values
-
     @http.route(['/mis-entregas'], type='http', auth="user", website=True)
     def portal_mis_entregas(self, **kw):
         partner = request.env.user.partner_id
         
-        # Filtro 
+        # Filtro innegociable de seguridad
         domain = [
             ('partner_id', '=', partner.id),
             ('picking_type_id.code', '=', 'incoming')
@@ -38,7 +27,7 @@ class PisterraPortal(CustomerPortal):
         partner = request.env.user.partner_id
         picking = request.env['stock.picking'].sudo().browse(picking_id)
         
-        # Validación de seguridad
+        # Validación de seguridad contra intrusiones (IDOR)
         if not picking.exists() or picking.partner_id.id != partner.id:
             return request.redirect('/mis-entregas')
             

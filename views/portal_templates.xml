@@ -11,17 +11,16 @@
         </template>
 
         <!-- Página de Listado -->
-        <template id="entrega_list_template" name="Mis Entregas">
-            <t t-call="portal.portal_layout">
-                <t t-set="breadcrumbs_searchbar" t-value="True"/>
-                <t t-call="portal.portal_searchbar">
-                    <t t-set="title">Historial de Entregas</t>
-                </t>
+<template id="entrega_list_template" name="Mis Entregas">
+    <t t-call="portal.portal_layout">
+        <div class="mt-4 mb-4">
+            <h3>Historial de Entregas</h3>
+        </div>
 
-                <t t-if="not pickings">
-                    <div class="alert alert-warning mt-4" role="alert">No tienes entregas registradas en el sistema.</div>
-                </t>
-                <t t-if="pickings">
+        <t t-if="not pickings">
+            <div class="alert alert-warning mt-4" role="alert">No tienes entregas registradas en el sistema.</div>
+        </t>
+        <t t-if="pickings">
                     <table class="table rounded mb-0 bg-white o_portal_my_doc_table mt-4">
                         <thead>
                             <tr class="active">
@@ -39,7 +38,7 @@
                                         </a>
                                     </td>
                                     <td><span t-field="picking.scheduled_date" t-options='{"widget": "date"}'/></td>
-                                    <td><span class="badge badge-pill badge-info" t-field="picking.state"/></td>
+                                    <td><span t-esc="picking.state"/></td>
                                 </tr>
                             </t>
                         </tbody>
@@ -72,8 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="picking.move_ids_without_package" t-as="move">
-                                    <tr>
+<t t-foreach="picking.move_ids" t-as="move">                                    <tr>
                                         <td><span t-field="move.product_id.name"/></td>
                                         <td class="text-right"><span t-field="move.product_uom_qty"/></td>
                                         <td><span t-field="move.product_uom.name"/></td>
